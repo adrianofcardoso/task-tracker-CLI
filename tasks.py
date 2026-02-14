@@ -1,34 +1,52 @@
-import datetime
-
-task_list = []
-id_counter = 1
+import json
+from datetime import datetime
+info = []
+id = 1
 
 while True:
 
   print("\n=== MENU DE TAREFAS ===")
   print("1. Add Task")
-  print("2. Update Task")
-  print("3. Delete Task")
-  print("4. List All Tasks")
-  print("5. Exit")
+  print("2. Update or Delete Task")
+  print("3. List All Tasks")
+  print("4. Exit")
 
   opcao = input("Choose an Option:")
 
   if opcao == "1":
     print("\n=== NEW TASK ===")
-    task = (input("Type the name task: "))
+    title = (input("Type the name task: "))
     description = (input("Type the description task:"))
     status = "todo"
-
-  elif opcao == "2":
-    print ("\n=== UPDATE TASK ===")
-    id_task_update = int(input("Type the id task to update:"))
-
-  task_list.append ({
-      "task": task,
-      "description": description,
-      "id": id_counter,
-      "status": status,
-      "createdAt": datetime.now(),
-      "updatedAt": datetime.now()
+    id += 1 
+    print(f"Task added successfully! (ID:{id})")
+    
+    info.append({
+    "id": id,
+    "title": title,
+    "description": description,
+    "status": status,
+    "createdAt": datetime.now().isoformat()
     })
+
+
+  if opcao == "2":
+    print ("\n=== UPDATE OR DELETE TASK ===")
+    task_id = int(input("Type the ID task:"))
+    
+    if task_id == id:
+      print("1. Update Task")
+      print("2. Delete Task")
+    else:
+      print("Task not found.")
+      continue
+  
+  elif opcao == "4":
+    print("\n=== ALL TASKS ===")
+    for task in info:
+      print(f"-> {info}")
+
+  if opcao == "5":
+    print("Exiting the program...")
+    break
+
