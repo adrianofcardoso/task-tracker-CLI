@@ -1,0 +1,74 @@
+[1mdiff --cc tasks.py[m
+[1mindex 91a8a3e,6b657fb..0000000[m
+[1m--- a/tasks.py[m
+[1m+++ b/tasks.py[m
+[36m@@@ -1,7 -1,7 +1,11 @@@[m
+  import json[m
+  from datetime import datetime[m
+  info = [][m
+[32m++<<<<<<< HEAD[m
+[32m +id = 1[m
+[32m++=======[m
+[32m+ id = 0[m
+[32m++>>>>>>> secundaria[m
+  [m
+  while True:[m
+  [m
+[36m@@@ -15,11 -15,10 +19,18 @@@[m
+  [m
+    if opcao == "1":[m
+      print("\n=== NEW TASK ===")[m
+[32m++<<<<<<< HEAD[m
+[32m +    title = (input("Type the name task: "))[m
+[32m +    description = (input("Type the description task:"))[m
+[32m +    status = "todo"[m
+[32m +    id += 1 [m
+[32m +    print(f"Task added successfully! (ID:{id})")[m
+[32m++=======[m
+[32m+     id += 1[m
+[32m+     title = (input("Type the name task:"))[m
+[32m+     description = (input("Type the description task:"))[m
+[32m+     status = "todo" [m
+[32m++>>>>>>> secundaria[m
+      [m
+      info.append({[m
+      "id": id,[m
+[36m@@@ -29,6 -28,7 +40,10 @@@[m
+      "createdAt": datetime.now().isoformat()[m
+      })[m
+  [m
+[32m++<<<<<<< HEAD[m
+[32m++=======[m
+[32m+     print(f"Task added successfully! (ID:{id})")[m
+[32m++>>>>>>> secundaria[m
+  [m
+    if opcao == "2":[m
+      print ("\n=== UPDATE OR DELETE TASK ===")[m
+[36m@@@ -41,12 -41,15 +56,27 @@@[m
+        print("Task not found.")[m
+        continue[m
+    [m
+[32m++<<<<<<< HEAD[m
+[32m +  elif opcao == "4":[m
+[32m +    print("\n=== ALL TASKS ===")[m
+[32m +    for task in info:[m
+[32m +      print(f"-> {info}")[m
+[32m +[m
+[32m +  if opcao == "5":[m
+[32m +    print("Exiting the program...")[m
+[32m +    break[m
+[32m +[m
+[32m++=======[m
+[32m+   elif opcao == "3":[m
+[32m+     print("\n=== ALL TASKS ===")[m
+[32m+     for i in info:[m
+[32m+       print(i, "->", {info})[m
+[32m+ [m
+[32m+   if opcao == "4":[m
+[32m+     print("Exiting the program...")[m
+[32m+     break[m
+[32m+ [m
+[32m+   else:[m
+[32m+     print("Invalid option. Please try again.")[m
+[32m+ [m
+[32m++>>>>>>> secundaria[m
