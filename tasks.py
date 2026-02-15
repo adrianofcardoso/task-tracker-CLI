@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
 info = []
-id = 0
+id = 1
 
 while True:
 
@@ -15,10 +15,11 @@ while True:
 
   if opcao == "1":
     print("\n=== NEW TASK ===")
-    id += 1
-    title = (input("Type the name task:"))
+    title = (input("Type the name task: "))
     description = (input("Type the description task:"))
-    status = "todo" 
+    status = "todo"
+    id += 1 
+    print(f"Task added successfully! (ID:{id})")
     
     info.append({
     "id": id,
@@ -28,9 +29,8 @@ while True:
     "createdAt": datetime.now().isoformat()
     })
 
-    print(f"Task added successfully! (ID:{id})")
 
-  if opcao == "2":
+  elif opcao == "2":
     print ("\n=== UPDATE OR DELETE TASK ===")
     task_id = int(input("Type the ID task:"))
     
@@ -43,13 +43,12 @@ while True:
   
   elif opcao == "3":
     print("\n=== ALL TASKS ===")
-    for i in info:
-      print(i, "->", {info})
+    for task in info:
+      print(f"-> {info}")
 
   if opcao == "4":
     print("Exiting the program...")
     break
-
+  
   else:
-    print("Invalid option. Please try again.")
-
+    print("\nInvalid option. Please choose a valid option.")
