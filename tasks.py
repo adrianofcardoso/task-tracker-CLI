@@ -46,7 +46,7 @@ while True:
     for task in info:
       print(f"-> {info}")
 
-  if opcao == "4":
+  elif opcao == "4":
     print("Exiting the program...")
     break
   
