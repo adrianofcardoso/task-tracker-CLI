@@ -30,7 +30,7 @@ while True:
     })
 
 
-  if opcao == "2":
+  elif opcao == "2":
     print ("\n=== UPDATE OR DELETE TASK ===")
     task_id = int(input("Type the ID task:"))
     
@@ -41,12 +41,14 @@ while True:
       print("Task not found.")
       continue
   
-  elif opcao == "4":
+  elif opcao == "3":
     print("\n=== ALL TASKS ===")
     for task in info:
       print(f"-> {info}")
 
-  if opcao == "5":
+  if opcao == "4":
     print("Exiting the program...")
     break
-
+  
+  else:
+    print("\nInvalid option. Please choose a valid option.")
