@@ -7,7 +7,7 @@ while True:
   print("\n=== MENU DE TAREFAS ===")
   print("1. Add Task")
   print("2. Update or Delete Task")
-  print("3. List All Tasks")
+  print("3. List Status Tasks")
   print("4. Exit")
 
   opcao = int(input("Choose an Option: "))
@@ -35,7 +35,11 @@ while True:
       print ("1. Update Task")
       print ("2. Delete Task")
       
-      option_id = int(input("\nChoose your option: "))
+      try:
+        option_id = int(input("\nChoose your option: "))
+      except ValueError:
+        print("Invalid input. Please enter a number.")
+        continue
       #criar condição de linha vazias para não dar erro de index 
       
       if option_id == 0:
@@ -43,11 +47,20 @@ while True:
       
       elif option_id == 1 or option_id == 2:
         print ("\n=== ALL TASKS ===\n")
+        
+        if len(info) == 0:
+          print("No tasks found or list is empty. Add a task to the list.")
+          continue
+        
         for i in info:
           print (f"{i}")
     
         while True:
-          task_id = int(input(f"\nType the ID of the task you want to {('update' if option_id == 1 else 'delete')}: "))
+          try:
+            task_id = int(input(f"\nType the ID of the task you want to {('update' if option_id == 1 else 'delete')}: "))
+          except ValueError:
+            print("Invalid input. Please enter a number.")
+            continue
           task_found = False
           task_to_modify = None 
           for i in info:
@@ -65,7 +78,7 @@ while True:
             if i["id"] == task_id:
               i["title"] = input("\nType the new name task: ")
               i["description"] = input("Type the new description task: ")
-              i["status"] = input("Type the new status task (todo, doing, done): ")
+              i["status"] = input("Type the new status task (todo, in-progress, done): ")
               i["updatedAt"] = datetime.now().isoformat()
               print("Task updated successfully!")
               print ("\n=== ALL TASKS ===\n")
@@ -88,10 +101,42 @@ while True:
       continue
     
   elif opcao == 3:
-    print("\n=== ALL TASKS ===")
-    for t in info:
-      print(f"{t}")
+    while True:
+      print("\n=== LIST STATUS TASKS ===")
+      print("0. Back to Main Menu")
+      print("1. List All Tasks")
+      print("2. List Only Tasks To Do ")
+      print("3. List Only Tasks In Progress ")
+      print("4. List Only Tasks Done ")
+      
+      try:
+        option_list = int(input("Choose an option: "))
+      except ValueError:
+        print("Invalid input. Please enter a number.")
+        continue
+          
+      if len(info) == 0:
+          print("\n=== LIST STATUS TASKS ===")
+          print("No tasks found or list is empty. Add a task to the list.")
+          break 
+      
+      try:
+        if option_list == 0:
+          break 
 
+        for t in info:
+          if option_list == 1:
+            print(f"{t}")
+          elif option_list == 2 and t ["status"] == "todo":
+            print(f"{t}")
+          elif option_list == 3 and t ["status"] == "in-progress":
+            print(f"{t}")
+          elif option_list == 4 and t ["status"] == "done":
+            print(f"{t}")
+      except ValueError:
+        print("\nInvalid option. Please choose a valid option.")
+        continue
+        
   elif opcao == 4:
     print("Exiting the program...")
     break
