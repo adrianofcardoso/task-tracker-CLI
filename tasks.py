@@ -1,5 +1,7 @@
 import json
 from datetime import datetime
+now = datetime.now()
+format_date = now.strftime("%Y-%m-%d %H:%M:%S")
 info = []
 
 while True:
@@ -25,7 +27,7 @@ while True:
     "title": title,
     "description": description,
     "status": status,
-    "createdAt": datetime.now().isoformat()
+    "createdAt": format_date
     })
 
   elif opcao == 2:
@@ -79,7 +81,7 @@ while True:
               i["title"] = input("\nType the new name task: ")
               i["description"] = input("Type the new description task: ")
               i["status"] = input("Type the new status task (todo, in-progress, done): ")
-              i["updatedAt"] = datetime.now().isoformat()
+              i["updatedAt"] = format_date
               print("Task updated successfully!")
               print ("\n=== ALL TASKS ===\n")
           for i in info:
