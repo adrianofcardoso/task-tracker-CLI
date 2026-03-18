@@ -84,41 +84,6 @@ def new_task():
     "createdAt": current_date(),
     })
 
-def update_task():
-  '''
-  Função para atualizar uma tarefa, solicitando ao usuário o ID da tarefa a ser atualizada e as informações a serem modificadas (título, descrição ou status).
-  '''
-  for t in info:
-    if t["id"] == task_id:
-        print("\n=== UPDATE TASK OPTIONS===")
-        print("1. Update Task Title")
-        print("2. Update Task Description")
-        print("3. Update Task Title and Description")
-        print("4. Update Task Status")
-
-        try:
-          update_option = int(input("\nChoose an option to update: "))
-        except ValueError:
-          print("Invalid input. Please enter a number.")
-          return
-
-        if update_option in [1, 2, 3, 4]: 
-          if update_option == 1:
-            t["title"] = input("\nType the new title task: ")
-          elif update_option == 2:
-            t["description"] = input("Type the new description task: ")
-          elif update_option == 3:
-            t["title"] = input("\nType the new title task: ")
-            t["description"] = input("Type the new description task: ")
-          elif update_option == 4:
-            t["status"] = input("Type the new status task (todo, in-progress, done): ")
-          t["updatedAt"] = current_date()
-          print("Task updated successfully!")
-          listar_tarefas(info)
-        else:
-          print("\nInvalid option. Please choose a valid option.")
-          return
-
 def delete_task():
   '''
   Função para deletar uma tarefa, solicitando ao usuário o ID da tarefa a ser deletada e removendo-a da lista de tarefas.
@@ -168,14 +133,21 @@ while True:
           break
         else:
           listar_tarefas(info)
+      
+      else:
+        print("\nInvalid option. Please choose a valid option.")
+        continue
     
-        #Verificação de ID para update ou delete, caso o ID não exista, solicitar novamente até que seja digitado um ID válido
-        while True:
+      #Verificação de ID para update ou delete, caso o ID não exista, solicitar novamente até que seja digitado um ID válido
+      
+      while True:
           try:
             task_id = int(input(f"\nType the ID of the task you want to {('update' if option_id == 1 else 'delete')}: "))
           except ValueError:
             print("Invalid input. Please enter a number.")
             continue
+
+          #Verificação se a task existe, caso exista, armazenar o índice da tarefa a ser modificada ou deletada, caso contrário, solicitar novamente até que seja digitado um ID válido
           task_found = False
           task_to_modify = None 
           for i in info:
@@ -188,15 +160,49 @@ while True:
           else:
             print("Task not found. Please enter a valid task ID.")
       
-        if option_id == 1:
-          update_task()
+      if option_id == 1:
+        while True:
+          print("\n=== UPDATE TASK OPTIONS===")
+          print("0. Back to Update or Delete Menu")
+          print("1. Update Task Title")
+          print("2. Update Task Description")
+          print("3. Update Task Title and Description")
+          print("4. Update Task Status")
+          
+          try:
+            update_option = int(input("\nChoose an option to update: "))
+          except ValueError:
+            print("Invalid input. Please enter a number.")
+            continue
+
+          if update_option == 0:
+            break
+          if update_option == 1:
+            i["title"] = input("\nType the new title task: ")
+            i["updatedAt"] = current_date()
+            print("Task updated successfully!")
+          elif update_option == 2:
+            i["description"] = input("Type the new description task: ")
+            i["updatedAt"] = current_date()
+            print("Task updated successfully!")
+          elif update_option == 3:
+            i["title"] = input("\nType the new title task: ")
+            i["description"] = input("Type the new description task: ")
+            i["updatedAt"] = current_date()
+            print("Task updated successfully!")
+          elif update_option == 4:
+            i["status"] = input("Type the new status task (todo, in-progress, done): ")
+            i["updatedAt"] = current_date()
+            print("Task updated successfully!")
+          else:
+            print("\nInvalid option. Please choose a valid option.")
+            continue
+          
+          listar_tarefas(info)
           continue
         
-        elif option_id == 2:  
+      elif option_id == 2:  
           delete_task()
-      
-      print("\nInvalid option. Please choose a valid option.")
-      continue
 
   elif opcao == 3:
     while True:
